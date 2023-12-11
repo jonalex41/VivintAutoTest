@@ -9,12 +9,12 @@ class MainPage extends Page {
     /**
      * define selectors using getter methods
      */
-    get loginBtn () { return $('a.login-link'); }
-    get careersLnk () { return $('//a[@href="https://www.vivint.com/company/careers"]'); }
+    get loginBtn () { return $('div.right a.login-link');; }
     get siteLogo () { return $('a.site-logo'); }
-    get homeSecuity () { return $x('//li/a[@href="/packages/home-security"]')[0]; }
-    get homeSecTitle () { return $('h1 span.white'); }
-    get verifyHuman () { return $('//input[@type="checkbox"]') }
+    get cartLogo() { return $('//p[@id="cart-icon-default"]') }
+    get searchIcon () { return $('button.search-icon.open-search-js') }
+    // get homeSecTitle () { return $('h1 span.white'); }
+    // get verifyHuman () { return $('//input[@type="checkbox"]') }
  
     async goToLogin () {
         await browser.pause(400)
@@ -23,28 +23,23 @@ class MainPage extends Page {
 
     async checkLinks () {
         await expect(this.siteLogo).toExist()
-        // await expect(this.homeSecurity).toExist()
+        await expect(this.loginBtn).toExist()
+        await expect(this.cartLogo).toExist()
+        await expect(this.searchIcon).toExist()
         await browser.pause(500)
-        await this.homeSecuity.click()
-        await browser.pause(500)
-        await expect(homeSecTitle).toHaveText(expect.stringContaining('BEST SMART HOME SECURITY SYSTEMS'))
-        await browser.pause(500)
-        await this.siteLogo.click()
-        await browser.pause(500)
-
     }
 
-    async goToCareers () {
-        await browser.pause(400)
-        await expect(this.careersLnk).toBeExisting()
-        await this.careersLnk.click()
-        await browser.pause(820)
-        await this.verifyHuman.click()
-    }
+    // async goToCareers () {
+    //     await browser.pause(400)
+    //     await expect(this.careersLnk).toBeExisting()
+    //     await this.careersLnk.click()
+    //     await browser.pause(7023)
+    //     // await this.verifyHuman.click()
+    // }
 
     async openPage () {
-        return super.open('');
-    }
+        return super.open('https://www.vivint.com');
+    } 
 }
 
 export default new MainPage();

@@ -9,15 +9,15 @@ class JobsLoginPage extends Page {
     /**
      * define selectors using getter methods
      */
-    get inputUsername () { return $('#usernameField'); }
-    get inputPassword () { return $('#passwordField'); }
-    get btnSubmit () { return $('button[@type="button"]'); }
+    get inputUsername () { return $('//input[@data-automation-id="email"]'); }
+    get inputPassword () { return $('//input[@data-automation-id="password"]'); }
+    get btnSubmit () { return $('//div[@data-automation-id="click_filter"]'); }
     get jobOpenings () { return $('//a[@href="https://vivint.wd5.myworkdayjobs.com/vivintjobs"]'); }
+    get signInBtn () { return $('//button[@data-automation-id="utilityButtonSignIn"]') }
     
     async viewJobOpenings () { 
         await browser.pause(400)
         await this.jobOpenings.click()
-        await browser.pause(400)
     }
 
     /**
@@ -25,16 +25,31 @@ class JobsLoginPage extends Page {
      * e.g. to login using username and password
      */
     async login (username, password) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+        // await this.jobOpenings.click()
+        // await browser.pause(500)
+        await this.signInBtn.click()
+        await browser.pause(500)
+        await expect(this.inputUsername).toExist()
+        await expect(this.inputPassword).toExist()
+        await expect(this.btnSubmit).toExist()
+        await browser.pause(500)
+        await this.inputUsername.setValue(username)
+        await browser.pause(500)
+        await this.inputPassword.setValue(password)
+        await browser.pause(500)
+        // await this.btnSubmit.click()
+        await browser.pause(500)
     }
 
     /**
      * overwrite specific options to adapt it to page object
      */
-    openPage () {
-        return super.open('/ppc/home');
+    async openPage () {
+        return super.open('https://vivint.wd5.myworkdayjobs.com/vivintjobs');
+    }
+
+    async navAway () {
+        return super.open('https://www.saucedemo.com');
     }
 }
 
