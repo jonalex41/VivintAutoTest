@@ -1,6 +1,7 @@
 import { $ } from '@wdio/globals'
-import Page from './page.js'
 import { browser } from '@wdio/globals'
+import Page from './page.js'
+import userInfo from '../security/userInfo.js'
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -16,17 +17,14 @@ class JobsLoginPage extends Page {
     get signInBtn () { return $('//button[@data-automation-id="utilityButtonSignIn"]') }
     
     async viewJobOpenings () { 
-        await browser.pause(400)
         await this.jobOpenings.click()
+        await browser.pause(400)
     }
-
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
      */
     async login (username, password) {
-        // await this.jobOpenings.click()
-        // await browser.pause(500)
         await this.signInBtn.click()
         await browser.pause(500)
         await expect(this.inputUsername).toExist()
@@ -37,20 +35,27 @@ class JobsLoginPage extends Page {
         await browser.pause(500)
         await this.inputPassword.setValue(password)
         await browser.pause(500)
-        // await this.btnSubmit.click()
+        await this.btnSubmit.waitForClickable({setTimeout: 600})
+        await this.btnSubmit.click()
         await browser.pause(500)
+    }
+
+    async tryAllLogins() {
+        for (let i = 0; i < userInfo.jobLogins.length; i++) {
+            await this.openPage()
+            await browser.pause(500)
+            await this.login(userInfo.jobLogins[i].name, userInfo.jobLogins[i].password)
+            await browser.pause(3000)
+        }
     }
 
     /**
      * overwrite specific options to adapt it to page object
      */
     async openPage () {
-        return super.open('https://vivint.wd5.myworkdayjobs.com/vivintjobs');
+        return super.navTo('https://vivint.wd5.myworkdayjobs.com/vivintjobs');
     }
 
-    async navAway () {
-        return super.open('https://www.saucedemo.com');
-    }
 }
 
 export default new JobsLoginPage();

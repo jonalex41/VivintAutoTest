@@ -51,7 +51,7 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
-        { browserName: 'chrome' }, { browserName:'safari' }
+        { browserName: 'chrome' }, { browserName:'firefox' }
     ],
 
     //
