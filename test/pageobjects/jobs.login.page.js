@@ -26,13 +26,11 @@ class JobsLoginPage extends Page {
      */
     async login (username, password) {
         await this.signInBtn.click()
-        await browser.pause(500)
+        await this.btnSubmit.waitForExist({timeout: 1000})
         await expect(this.inputUsername).toExist()
         await expect(this.inputPassword).toExist()
         await expect(this.btnSubmit).toExist()
-        await browser.pause(500)
         await this.inputUsername.setValue(username)
-        await browser.pause(500)
         await this.inputPassword.setValue(password)
         await browser.pause(500)
         await this.btnSubmit.waitForClickable({setTimeout: 600})
