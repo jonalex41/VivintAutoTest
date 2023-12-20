@@ -56,8 +56,7 @@ class addItemToCart {
         await this.doorCamLnk.waitForDisplayed({timeout: 3000})
         // await this.clickOn(this.doorCamLnk)
         // await this.scrollPage(300)
-        await browser.pause(1000)
-        // await this.clickOn(this.doorCamLnk)
+        // await browser.pause(60000)
         // await this.doorCamAdd.waitForDisplayed({timeout: 3000})
         // await this.clickOn(this.doorCamAdd)
         // await browser.pause(1000)
@@ -66,7 +65,7 @@ class addItemToCart {
         // browser.pause(1000)
         // await browser.action('pointer')
         //     .move({ duration: 200, origin: this.cameras, x: 5, y: 5})
-        //     .pause(200)
+        //     .pause(500)
         //     .move({duration: 200, origin: this.doorCamLnk, x: 5, y: 5})
         //     .pause(200)
         //     .down({ button: 0 }) // left button

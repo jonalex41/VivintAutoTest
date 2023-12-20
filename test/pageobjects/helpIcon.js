@@ -13,7 +13,7 @@ class helpIcon {
     // get answer3 () { return $('li[aria-posinset="3"] > button'); }
     get helpFrame () { return $('div#drift-frame-controller'); }
     // get header () { return $('header#header') }
-    // get helpIframe () { return browser.$('div#drift-frame-controller > iframe') }
+    get helpIframe () { return $('div#drift-frame-controller > iframe.drift-frame-chat') }
     get helpTextArea () { return $('div#root textarea'); }
     // get root () { return $('#root') }
 
@@ -26,21 +26,23 @@ class helpIcon {
             .down({ button: 0 }) // left button
             .pause(30)
             .up({ button: 0 })
-            .pause(3000)
-            // .move({ duration: 200, origin: this.helpTextArea, x: 2, y: 3 })
-            // .down({button: 0})
-            // .pause(10)
-            // .up({button: 0})
-            // .pause(1000)
-            // .move({ duration: 1000, origin: this.header, x: 10, y: 10 })
+            .pause(1000)
             .perform()
+        await browser.pause(4000)
         // await this.helpTextArea.click()
-        // await this.helpTextArea.click()
-        await browser.pause(1000)
         await browser.action('key')
             .down('t')
-            .pause(10)
+            .pause(20)
+            .down('r')
+            .pause(20)
+            .down('y')
+            .pause(20)
             .up('t')
+            .pause(20)
+            .up('r')
+            .pause(20)
+            .up('y')
+
     }
 }
 

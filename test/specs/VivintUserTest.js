@@ -19,7 +19,6 @@ describe('Test help button', () => {
 
 describe('User Security Test for vivint users', () => {
     it('Check login test.', async () => {
-        // await MainPage.navToPage('')
-        // await loginPage.tryAllLogins()
+        await loginPage.tryAllLogins()
     })
 })

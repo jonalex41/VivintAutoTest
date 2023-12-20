@@ -35,7 +35,6 @@ class MainPage extends Page {
 
     async bottomLinks () {
         await browser.scroll(0, 8050)
-        // await browser.pause(500)
         for (let i = 0; i < this.bottomNavBoxes.length; i++) {
             await expect($(this.bottomNavBoxes[i])).toExist()
         }

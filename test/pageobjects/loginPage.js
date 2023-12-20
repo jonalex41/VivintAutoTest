@@ -34,7 +34,6 @@ class loginPage {
     }
 
     async tryAllLogins() {
-        // await browser.url('https://www.vivint.com')
         await this.clickLoginBtn()
         await browser.pause(500)
         for (let i = 0; i < userInfo.userLogins.length; i++) {
