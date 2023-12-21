@@ -1,7 +1,8 @@
 import { $ } from '@wdio/globals'
 import { browser } from '@wdio/globals'
-import Page from './page.js';
+import Page from './page.js'
 import navBar from './navBar.js'
+import doAction from './base.js'
 
 /**
  * Class for testing of the Vivint web site.
@@ -21,7 +22,6 @@ class MainPage extends Page {
     async checkLinks () {
         await browser.setWindowSize(1800, 1000)
         await this.sideLinks()
-        // CheckNavigation bar for hover function.
         await navBar.checkNavBar() // function in navBar.js
         await this.bottomLinks()
     }
@@ -43,6 +43,31 @@ class MainPage extends Page {
     async navToPage (ext) {
         return super.navTo('https://www.vivint.com' + ext)
     } 
+
+    async clickOn (elem) {
+        await browser.action('pointer')
+            .move({duration: 300, origin: elem, x: 7, y: 5})
+            .pause(200)
+            .down({ button: 0 }) // left button
+            .pause(12)
+            .up({ button: 0 })
+            .perform()
+    }
+
+    async hoverOver (elem) {
+        await browser.action('pointer')
+            .move({ duration: 300, origin: elem, x: 7, y: 6})
+            .pause(500)
+            .perform()
+    }
+
+    async scrollPage (y) {
+        await browser.action('wheel').scroll({
+            deltaX: 0,
+            deltaY: y,
+            duration: 200
+        }).perform()
+    }
 }
 
 export default new MainPage();

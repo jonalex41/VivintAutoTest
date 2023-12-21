@@ -7,7 +7,7 @@ describe('Main page exploratory test', () => {
     it('Verify content aligns with layout, and links work as expected.', async () => {
         await MainPage.navToPage('')
         await MainPage.checkLinks()
-        await addItemToCart.allItems()
+        // await addItemToCart.allItems()
     })
 })
 

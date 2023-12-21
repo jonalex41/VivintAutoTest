@@ -1,7 +1,7 @@
 import { $ } from '@wdio/globals'
 import { $$ } from '@wdio/globals'
 import { browser } from '@wdio/globals'
-// import Page from './page.js';
+import doAction from './base.js'
 
 /**
  * Class for testing of the Vivint web site.
@@ -22,17 +22,13 @@ class navBar {
     get mainNavLi () { return $$('div.left > nav.block > ul > li'); }
     
     async checkNavItem () {
-        await expect(this.navItem).toBeExisting();
-        await browser.action('pointer')
-            .pause(100)
-            .move({ duration: 100, origin: this.navItem, x: 5, y: 5})
-            .pause(200)
-            .perform()
+        await expect(this.navItem).toBeExisting()
+        await doAction.hoverOver(this.navItem)
         await browser.pause(200)
     }
 
     async checkNavBar () {
-        // await browser.setWindowSize(1800, 1000);
+        await browser.setWindowSize(1800, 1000);
         await expect(this.menuBar).toHaveChildren(5)
         const mainNav = await this.mainNavLi;
         for (let i = 0; i < mainNav.length; i++) {

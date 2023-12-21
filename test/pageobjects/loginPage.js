@@ -30,7 +30,7 @@ class loginPage {
         await this.logIn.waitForClickable({setTimeout: 700})
         await this.logIn.click()
         await browser.pause(500)
-        await expect($('#form-error')).toExist()//.toHaveText(expect.stringContaining('Invalid email or password.'))
+        await expect($('#form-error')).toExist() //.toHaveText(expect.stringContaining('Invalid email or password.'))
     }
 
     async tryAllLogins() {
