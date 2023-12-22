@@ -31,6 +31,14 @@ class doAction {
                 .perform()
         }
     }
+
+    async scrollPage (y) {
+        await browser.action('wheel').scroll({
+            deltaX: 0,
+            deltaY: y,
+            duration: 200
+        }).perform()
+    }
 }
 
 export default new doAction();
